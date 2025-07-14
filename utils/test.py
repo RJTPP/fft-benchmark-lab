@@ -62,17 +62,38 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
 
 
 def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None):
+    results = []
+    
     if name is None:
         name = get_func_name(func)
         
     print(f"🔍 Speed Testing: {name}...")
-    start_time = perf_counter()
-    for x in test_cases:
-        func(x)
-    end_time = perf_counter()
-    time_used_ms = (end_time - start_time) * 1e6
-    avg_time_ms = time_used_ms / len(test_cases)
-    print(f"  ✅ Time: {time_used_ms:.2f} ms (avg: {avg_time_ms:.2f} ms)")
+    for i, test in enumerate(test_cases):
+        res = {
+            "no": i + 1,
+            "input": test,
+            "time_used_ms": None,
+            "avg_time_ms": None,
+            "is_error": False
+        }
+        try:
+            start_time = perf_counter()
+            for x in test_cases:
+                func(x)
+            end_time = perf_counter()
+            time_used_ms = (end_time - start_time) * 1e6
+            avg_time_ms = time_used_ms / len(test_cases)
+            print(f"  ✅ Time: {time_used_ms:.2f} ms (avg: {avg_time_ms:.2f} ms)")
+            res["time_used_ms"] = time_used_ms
+            res["avg_time_ms"] = avg_time_ms
+            res["is_error"] = False
+        except Exception as e:
+            print(f"  💥 Time: ERROR ({e})")
+            res["is_error"] = True
+            
+        results.append(res)
+        
+    return results
             
 
 if __name__ == "__main__":
@@ -82,5 +103,5 @@ if __name__ == "__main__":
     for test in a:
         print(test)
         
-    # for test in b:
-    #     print(test)
+    for test in b:
+        print(test)
