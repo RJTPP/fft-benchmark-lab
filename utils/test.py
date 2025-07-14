@@ -121,6 +121,7 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None, v
 if __name__ == "__main__":
     a = test_correctness(np.fft.fft, test_case.simple_test_cases, verbose=True)
     b = test_speed(np.fft.fft, test_case.simple_test_cases, verbose=True)
+    c = test_speed(scipy_fft, test_case.simple_test_cases, verbose=True)
     
     # for test in a:
     #     print(test)
