@@ -1,7 +1,10 @@
 [project]
-name = "private-signal-fft"
-version = "0.1.0"
-description = "Add your description here"
+name = "fft_project"
+version = "0.1.0.dev0"
+description = "Custom FFT implementation and testing against SciPy"
+authors = [
+  { name="Rajata Thamcharoensatit" }
+]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = []
