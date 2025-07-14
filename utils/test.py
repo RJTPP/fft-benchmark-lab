@@ -13,22 +13,52 @@ def get_func_name(func: callable):
 
 
 def test_correctness(func: callable, test_cases: list[np.ndarray], reference_func: callable=scipy_fft, name: str = None):
+    results = []
+    
     if name is None:
         name = get_func_name(func)
         
     print(f"🔍 Correctness Testing: {name}...")
     for i, x in enumerate(test_cases):
+        res = {
+            "no": i + 1,
+            "input": x,
+            "expected": None,
+            "output": None,
+            "mae": None,
+            "mse": None,
+            "is_pass": False,
+            "is_error": False,
+        }
+        
         try:
             output = func(x)
             expected = reference_func(x)
             mae = np.mean(np.abs(output - expected))
             mse = np.mean(np.square(output - expected))
+            
+            
+            res["expected"] = expected
+            res["output"] = output
+            res["mae"] = mae
+            res["mse"] = mse
+            
             assert np.allclose(output, expected, rtol=1e-5, atol=1e-8)
             print(f"  ✅ Test case {i + 1}: PASS (MAE: {mae:.2g}, MSE: {mse:.2g})")
+            res["is_pass"] = True
+            res["is_error"] = False
         except AssertionError:
             print(f"  ❌ Test case {i + 1}: FAIL (MAE: {mae:.2g}, MSE: {mse:.2g})")
+            res["is_pass"] = False
+            res["is_error"] = False
         except Exception as e:
             print(f"  💥 Test case {i + 1}: ERROR ({e})")
+            res["is_pass"] = False
+            res["is_error"] = True
+            
+        results.append(res)
+        
+    return results
 
 
 def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None):
@@ -46,5 +76,11 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None):
             
 
 if __name__ == "__main__":
-    test_correctness(np.fft.fft, test_case.simple_test_cases)
-    test_speed(np.fft.fft, test_case.simple_test_cases)
+    a = test_correctness(np.fft.fft, test_case.simple_test_cases)
+    b = test_speed(np.fft.fft, test_case.simple_test_cases)
+    
+    for test in a:
+        print(test)
+        
+    # for test in b:
+    #     print(test)
