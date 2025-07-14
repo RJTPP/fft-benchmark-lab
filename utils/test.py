@@ -83,7 +83,7 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None):
             end_time = perf_counter()
             time_used_ms = (end_time - start_time) * 1e6
             avg_time_ms = time_used_ms / len(test_cases)
-            print(f"  ✅ Time: {time_used_ms:.2f} ms (avg: {avg_time_ms:.2f} ms)")
+            print(f"  ✅ Time: {time_used_ms:.2f} ms (avg per bin: {avg_time_ms:.2f} ms)")
             res["time_used_ms"] = time_used_ms
             res["avg_time_ms"] = avg_time_ms
             res["is_error"] = False
@@ -100,8 +100,8 @@ if __name__ == "__main__":
     a = test_correctness(np.fft.fft, test_case.simple_test_cases)
     b = test_speed(np.fft.fft, test_case.simple_test_cases)
     
-    for test in a:
-        print(test)
+    # for test in a:
+    #     print(test)
         
-    for test in b:
-        print(test)
+    # for test in b:
+    #     print(test)
