@@ -103,7 +103,9 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None, v
             avg_time_us = time_used_us / len(test)
             
             # Output
-            verbose_output = f"  ✅ Time: {time_used_us:.2f} µs (avg per bin: {avg_time_us:.2f} µs)"
+            is_exceed_thousands = time_used_us > 1000
+            unit_str = "ms" if is_exceed_thousands else "µs"
+            verbose_output = f"  ✅ Time: {time_used_us if not is_exceed_thousands else time_used_us/1000:>6.2f} {unit_str} (avg per bin: {avg_time_us:.2f} µs)"
             res["time_used_us"] = time_used_us
             res["time_per_bin_us"] = avg_time_us
             res["is_error"] = False
