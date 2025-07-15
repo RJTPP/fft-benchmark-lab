@@ -36,7 +36,7 @@ if __name__ == "__main__":
     print()
     print("Testing correctness...")
     print()
-    test_fft_correctness(test_case.simple_test_cases, verbose=True)
+    test_fft_correctness(test_case.combined_test_cases, verbose=True)
     print()
     print("Testing speed...")
     print()

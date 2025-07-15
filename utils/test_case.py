@@ -7,6 +7,16 @@ simple_test_cases = [
     np.array([1+1j, 2+2j, 3+3j, 4+4j], dtype=complex),
 ]
 
+real_test_cases = [
+    np.random.rand(2**x) for x in range(0, 10)
+]
+
+complex_test_cases = [
+    np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(0, 10)
+]
+
+combined_test_cases = real_test_cases + complex_test_cases
+
 mid_size_test_cases = [
     np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(7, 12)
 ]
