@@ -1,7 +1,7 @@
 [project]
 name = "fft_project"
 version = "0.1.0.dev0"
-description = "Custom FFT implementation and testing against SciPy"
+description = "Hands-on exploration and benchmarking of custom FFT implementations"
 authors = [
   { name="Rajata Thamcharoensatit" }
 ]
