@@ -43,6 +43,8 @@ project/
 │
 ├── main.py            # CLI entry point for benchmarking
 ├── README.md          # Project overview (this file)
+├── uv.lock            # uv package lock file
+├── requirements.txt   # Python dependencies (if not using uv)
 └── pyproject.toml     # Project metadata
 ```
 
