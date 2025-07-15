@@ -10,21 +10,21 @@ functions = {
     "fft_prototype": fft_prototype
 }
 
-def test_fft_correctness(verbose=True):
+def test_fft_correctness(testcase, verbose=True):
     for name, func in functions.items():
         test.test_correctness(
             func, 
-            test_case.simple_test_cases, 
+            testcase, 
             reference_func=scipy_fft, 
             name=name,
             verbose=verbose,
         )
 
-def test_fft_speed(verbose=True):
+def test_fft_speed(testcase, verbose=True):
     for name, func in functions.items():
         test.test_speed(
             func, 
-            test_case.mid_size_test_cases, 
+            testcase, 
             name=name,
             verbose=verbose,
         )
@@ -32,12 +32,12 @@ def test_fft_speed(verbose=True):
 
 if __name__ == "__main__":
     print("Warming up...")
-    test_fft_correctness(verbose=False)
+    test_fft_correctness(test_case.simple_test_cases, verbose=False)
     print()
     print("Testing correctness...")
     print()
-    test_fft_correctness(verbose=True)
+    test_fft_correctness(test_case.simple_test_cases, verbose=True)
     print()
     print("Testing speed...")
     print()
-    test_fft_speed(verbose=True)
+    test_fft_speed(test_case.mid_size_test_cases, verbose=True)
