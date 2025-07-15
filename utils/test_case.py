@@ -25,6 +25,14 @@ large_test_cases = [
     np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(10, 20)
 ]
 
+large_test_cases_extended = [
+    np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(1, 20)
+]
+
+massive_test_cases = [
+    np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(1, 28)
+]
+
 # large_npy_one_case = [
 #     np.array([1]*(2**x), dtype=complex) for x in range(25, 28)
 # ]

@@ -40,7 +40,7 @@ if __name__ == "__main__":
     print()
     print("Testing speed...")
     print()
-    test_fft_speed(test_case.large_test_cases, verbose=True)
+    test_fft_speed(test_case.large_test_cases_extended, verbose=True)
     print()
     # print("Testing speed (2)...")
     # test_fft_speed(test_case.large_npy_one_case, verbose=True)
