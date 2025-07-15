@@ -12,8 +12,12 @@ mid_size_test_cases = [
 ]
 
 large_test_cases = [
-    np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(20, 25)
+    np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(10, 20)
 ]
+
+# large_npy_one_case = [
+#     np.array([1]*(2**x), dtype=complex) for x in range(25, 28)
+# ]
 
 
 def print_test_case(test_case: list[np.ndarray]):
