@@ -31,6 +31,9 @@ def test_fft_speed(verbose=True):
 
 
 if __name__ == "__main__":
+    print("Warming up...")
+    test_fft_correctness(verbose=False)
+    print()
     print("Testing correctness...")
     print()
     test_fft_correctness(verbose=True)
