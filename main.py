@@ -1,7 +1,7 @@
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
 from utils import test, test_case
-from fft_core.fft_prototype import naiveDFT, fft_prototype
+from fft_core.fft_base import naiveDFT, fft_prototype
 
 functions = {
     "numpy_fft (Reference)": numpy_fft,
