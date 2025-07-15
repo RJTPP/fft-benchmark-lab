@@ -2,7 +2,9 @@ import numpy as np
 
 
 def naiveDFT(x):
-    """The naive implementation for comparison (O(N^2))"""
+    """
+    The naive implementation for comparison. O(N^2) complexity
+    """
     N = x.size
     X = np.ones(N)*(0+0j)
 
@@ -15,6 +17,9 @@ def naiveDFT(x):
     return X
 
 def fft_prototype(x: np.ndarray):
+    """
+    Recursive Fast Fourier Transform (FFT).
+    """
     if len(x) == 1:
         return x
     
