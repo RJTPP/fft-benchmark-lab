@@ -1,13 +1,22 @@
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
 from utils import test, test_case
-from fft_core.fft_base import naiveDFT, fft_prototype
+from fft_core import (
+    naiveDFT,
+    fft_recursive,
+    fft_iterative,
+    fft_iterative_numba,
+    fft_iterative_numba_64,
+)
 
 functions = {
     "numpy_fft (Reference)": numpy_fft,
     "scipy_fft (Reference)": scipy_fft,
-    "naiveDFT": naiveDFT,
+    # "naiveDFT": naiveDFT,
     # "fft_recursive": fft_recursive,
+    # "fft_iterative": fft_iterative,
+    "fft_iterative (numba)": fft_iterative_numba,
+    # "fft_iterative (numba, 64bits)": fft_iterative_numba_64,
 }
 
 def test_fft_correctness(testcase, verbose=True):
