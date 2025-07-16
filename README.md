@@ -53,8 +53,8 @@ project/
 Clone this repository:
 
 ```bash
-git clone https://github.com/your-username/[PROJECT].git
-cd [PROJECT]
+git clone https://github.com/your-username/custom-fft-lab.git
+cd custom-fft-lab
 ```
 
 

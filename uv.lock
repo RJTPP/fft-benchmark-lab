@@ -3,7 +3,7 @@ revision = 2
 requires-python = ">=3.11"
 
 [[package]]
-name = "fft-project"
+name = "custom-fft-lab"
 version = "0.1.0.dev0"
 source = { virtual = "." }
 dependencies = [
