@@ -7,7 +7,7 @@ functions = {
     "numpy_fft (Reference)": numpy_fft,
     "scipy_fft (Reference)": scipy_fft,
     "naiveDFT": naiveDFT,
-    "fft_prototype": fft_prototype
+    # "fft_recursive": fft_recursive,
 }
 
 def test_fft_correctness(testcase, verbose=True):

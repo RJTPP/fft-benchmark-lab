@@ -16,7 +16,7 @@ def naiveDFT(x):
 
     return X
 
-def fft_prototype(x: np.ndarray):
+def fft_recursive(x: np.ndarray):
     """
     Fast Fourier Transform (FFT) using the recursive Radix-2 Cooley-Tukey algorithm.
     """
@@ -27,8 +27,8 @@ def fft_prototype(x: np.ndarray):
     
     even = x[::2]
     odd = x[1::2]
-    even = fft_prototype(even)
-    odd = fft_prototype(odd)
+    even = fft_recursive(even)
+    odd = fft_recursive(odd)
     
     k = np.arange(N // 2)
     w = np.exp(-2j*np.pi*k/N)
@@ -43,4 +43,4 @@ if __name__ == "__main__":
     x = np.array([1, 2, 3, 4])
     print(f"Expected: {np.fft.fft(x)}")
     print(naiveDFT(x))
-    print(fft_prototype(x))
+    print(fft_recursive(x))
