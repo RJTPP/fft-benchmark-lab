@@ -102,8 +102,8 @@ python main.py
   ✅ Test case 2: PASS (MAE: 0, MSE: 0+0j)
 
 🕐 Speed Testing: simple_fft...
-   ✅ Time (size: 1024): 17.92 µs (avg per bin: 0.018 µs)
-   ✅ Time (size: 2048): 42.68 µs (avg per bin: 0.021 µs)
+  ✅ Time (size: 1024): 17.92 µs (avg per bin: 0.018 µs)
+  ✅ Time (size: 2048): 42.68 µs (avg per bin: 0.021 µs)
 ```
 
 
