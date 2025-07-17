@@ -1,4 +1,12 @@
-from .fft_base import fft_recursive, naiveDFT
-from .fft_iterative import fft_iterative
-from .fft_numba import fft_iterative_numba, fft_iterative_numba_64
-from .fft_numba_inplace import fft_iterative_numba_inplace
+# fft_core/__init__.py
+import os, importlib
+
+# import every module so decorators run
+_pkg = __name__
+_dir = os.path.dirname(__file__)
+for fname in os.listdir(_dir):
+    if fname.endswith(".py") and fname != "__init__.py":
+        importlib.import_module(f"{_pkg}.{fname[:-3]}")
+
+# expose the registry at package level
+from .selection import fft_functions

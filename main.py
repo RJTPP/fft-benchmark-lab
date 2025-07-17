@@ -1,26 +1,24 @@
+import logging
+
+# 1. Configure the root logger:
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)-8s %(name)s: %(message)s"
+)
+
+# 2. (Optional) If you want all modules to inherit this level:
+logging.getLogger().setLevel(logging.INFO)
+
+
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
 from utils import test, test_case
-from fft_core import (
-    naiveDFT,
-    fft_recursive,
-    fft_iterative,
-    fft_iterative_numba,
-    fft_iterative_numba_64,
-)
+from fft_core import fft_functions
 
-functions = {
-    "numpy_fft (Reference)": numpy_fft,
-    "scipy_fft (Reference)": scipy_fft,
-    # "naiveDFT": naiveDFT,
-    # "fft_recursive": fft_recursive,
-    # "fft_iterative": fft_iterative,
-    "fft_iterative (numba)": fft_iterative_numba,
-    # "fft_iterative (numba, 64bits)": fft_iterative_numba_64,
-}
+fft_functions = {"numpy": numpy_fft, "scipy": scipy_fft, **fft_functions}
 
 def test_fft_correctness(testcase, verbose=True):
-    for name, func in functions.items():
+    for name, func in fft_functions.items():
         test.test_correctness(
             func, 
             testcase, 
@@ -30,7 +28,7 @@ def test_fft_correctness(testcase, verbose=True):
         )
 
 def test_fft_speed(testcase, verbose=True):
-    for name, func in functions.items():
+    for name, func in fft_functions.items():
         test.test_speed(
             func, 
             testcase, 
@@ -40,6 +38,9 @@ def test_fft_speed(testcase, verbose=True):
 
 
 if __name__ == "__main__":
+    # TODO: Update README
+    # print(fft_functions)
+    print()
     print("Warming up...")
     test_fft_correctness(test_case.get_simple_test_cases(), verbose=False)
     print()
