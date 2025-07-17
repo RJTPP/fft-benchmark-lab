@@ -1,26 +1,10 @@
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
 from utils import test, test_case
-from fft_core import (
-    naiveDFT,
-    fft_recursive,
-    fft_iterative,
-    fft_iterative_numba,
-    fft_iterative_numba_64,
-)
-
-functions = {
-    "numpy_fft (Reference)": numpy_fft,
-    "scipy_fft (Reference)": scipy_fft,
-    # "naiveDFT": naiveDFT,
-    # "fft_recursive": fft_recursive,
-    # "fft_iterative": fft_iterative,
-    "fft_iterative (numba)": fft_iterative_numba,
-    # "fft_iterative (numba, 64bits)": fft_iterative_numba_64,
-}
+from fft_selection import fft_functions
 
 def test_fft_correctness(testcase, verbose=True):
-    for name, func in functions.items():
+    for name, func in fft_functions.items():
         test.test_correctness(
             func, 
             testcase, 
@@ -30,7 +14,7 @@ def test_fft_correctness(testcase, verbose=True):
         )
 
 def test_fft_speed(testcase, verbose=True):
-    for name, func in functions.items():
+    for name, func in fft_functions.items():
         test.test_speed(
             func, 
             testcase, 
@@ -40,6 +24,7 @@ def test_fft_speed(testcase, verbose=True):
 
 
 if __name__ == "__main__":
+    # TODO: Update README
     print("Warming up...")
     test_fft_correctness(test_case.get_simple_test_cases(), verbose=False)
     print()
