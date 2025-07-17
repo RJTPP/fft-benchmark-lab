@@ -1,6 +1,8 @@
+from .selection import register_fft
 import numpy as np
 
 
+# @register_fft
 def naiveDFT(x):
     """
     The naive implementation of DFT for comparison. O(N^2) complexity
@@ -16,6 +18,7 @@ def naiveDFT(x):
 
     return X
 
+# @register_fft(name="recursive")
 def fft_recursive(x: np.ndarray):
     """
     Fast Fourier Transform (FFT) using the recursive Radix-2 Cooley-Tukey algorithm.
@@ -42,5 +45,4 @@ def fft_recursive(x: np.ndarray):
 if __name__ == "__main__":
     x = np.array([1, 2, 3, 4])
     print(f"Expected: {np.fft.fft(x)}")
-    print(naiveDFT(x))
     print(fft_recursive(x))

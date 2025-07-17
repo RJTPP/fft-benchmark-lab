@@ -1,3 +1,4 @@
+from .selection import register_fft
 import numpy as np
 from numba import njit
 
@@ -15,6 +16,7 @@ def bit_reverse_indices(n: int) -> np.ndarray:
         result[i] = rev
     return result
 
+@register_fft(name="iterative_numba")
 @njit(fastmath=True, cache=True)
 def fft_iterative_numba(x: np.ndarray) -> np.ndarray:
     """
