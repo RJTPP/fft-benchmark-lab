@@ -13,7 +13,8 @@
   - [📥 Getting Started](#-getting-started)
   - [🔧 Installation](#-installation)
   - [🚀 Usage](#-usage)
-    - [Running Benchmark](#running-benchmark)
+    - [📈 Running Benchmark](#-running-benchmark)
+    - [✏️ Custom FFT Implementations](#️-custom-fft-implementations)
   - [📊 Example Output](#-example-output)
   - [📄 License](#-license)
   - [🧑‍💻 Contributors](#-contributors)
@@ -77,7 +78,7 @@ pip install -r requirements.txt
 
 ## 🚀 Usage
 
-### Running Benchmark
+### 📈 Running Benchmark
 
 To run the benchmark tests, execute the main script:
 
@@ -91,7 +92,28 @@ Or if you prefer using `python`:
 python main.py
 ```
 
-<!-- TODO: Add custom functions selection guideline -->
+
+### ✏️ Custom FFT Implementations
+
+To add a new FFT implementation:
+
+1. Create a new file in `fft_core/`, e.g. `fft_myalgo.py`.
+2. Decorate your FFT function with `@register_fft` from `fft_core.selection`:
+   ```python
+    from .selection import register_fft
+    import numpy as np
+
+    @register_fft
+    # Or use a custom name: @register_fft(name="myalgo")
+    def fft(x: np.ndarray) -> np.ndarray:
+        """Your FFT algorithm here"""
+        return ...
+   ```
+    - Each function will be auto-registered by name.
+    - If multiple functions share the same name, they will be renamed automatically (e.g., `fft`, `fft_1`, `fft_2`, …).
+    - The function must accept a 1D np.ndarray of complex values and return a transformed np.ndarray of the same shape and type.
+
+3. The main script will automatically detect `fft_myalgo.fft` and include it in benchmarks.
 
 
 ## 📊 Example Output
