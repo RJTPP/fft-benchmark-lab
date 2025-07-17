@@ -1,7 +1,7 @@
 from .selection import register_fft
 import numpy as np
 
-@register_fft(name="iterative")
+# @register_fft(name="iterative")
 def fft_iterative(x: np.ndarray) -> np.ndarray:
     """
     Fast Fourier Transform (FFT) using the iterative Radix-2 Cooley-Tukey algorithm with bit-reversal permutation.

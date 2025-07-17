@@ -54,7 +54,7 @@ def _fft_iterative_numba_inplace_helper(x: np.ndarray) -> np.ndarray:
     return x
 
 
-@register_fft(name="iterative_numba_inplace")
+# @register_fft(name="iterative_numba_inplace")
 def fft_iterative_numba_inplace_wrapper(x: np.ndarray) -> np.ndarray:
     # Ensure input is complex for in-place operations
     if x.dtype != np.complex128:
