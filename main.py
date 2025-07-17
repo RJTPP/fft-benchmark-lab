@@ -15,7 +15,11 @@ from scipy.fft import fft as scipy_fft
 from utils import test, test_case
 from fft_core import fft_functions
 
-fft_functions = {"numpy": numpy_fft, "scipy": scipy_fft, **fft_functions}
+fft_functions = {
+    "numpy": numpy_fft,
+    "scipy": scipy_fft,
+    **fft_functions
+}
 
 def test_fft_correctness(testcase, verbose=True):
     for name, func in fft_functions.items():
