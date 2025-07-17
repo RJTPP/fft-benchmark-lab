@@ -35,6 +35,7 @@
 project/
 ├── fft_core/
 │   ├── __init__.py
+│   ├── selection.py   # Helper file for importing FFT implementations
 │   └── ...            # FFT implementations
 │
 ├── util/
