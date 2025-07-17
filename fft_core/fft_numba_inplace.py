@@ -1,7 +1,8 @@
+from .selection import register_fft
 import numpy as np
 from numba import njit, jit
 
-# The bit_reverse_indices function remains the same.
+
 @njit(cache=True)
 def bit_reverse_indices(n: int) -> np.ndarray:
     """
@@ -53,7 +54,8 @@ def _fft_iterative_numba_inplace_helper(x: np.ndarray) -> np.ndarray:
     return x
 
 
-def fft_iterative_numba_inplace(x: np.ndarray) -> np.ndarray:
+@register_fft(name="iterative_numba_inplace")
+def fft_iterative_numba_inplace_wrapper(x: np.ndarray) -> np.ndarray:
     # Ensure input is complex for in-place operations
     if x.dtype != np.complex128:
         x = x.astype(np.complex128)
@@ -63,4 +65,4 @@ def fft_iterative_numba_inplace(x: np.ndarray) -> np.ndarray:
 if __name__ == "__main__":
     x = np.array([1, 2, 3, 4])
     print(f"Expected: {np.fft.fft(x)}")
-    print(f"Got     : {fft_iterative_numba_inplace(x)}")
+    print(f"Got     : {fft_iterative_numba_inplace_wrapper(x)}")
