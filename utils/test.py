@@ -2,8 +2,6 @@ import numpy as np
 from scipy.fft import fft as scipy_fft
 from time import perf_counter
 
-from . import test_case
-
 
 def get_func_name(func: callable):
     try:
@@ -121,9 +119,15 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None, v
             
 
 if __name__ == "__main__":
-    a = test_correctness(np.fft.fft, test_case.simple_test_cases, verbose=True)
-    b = test_speed(np.fft.fft, test_case.large_test_cases, verbose=True)
-    c = test_speed(scipy_fft, test_case.large_test_cases, verbose=True)
+    import os
+    import sys
+    sys.path.insert(0, os.path.dirname(__file__))
+    
+    import test_case
+    
+    a = test_correctness(np.fft.fft, test_case.get_simple_test_cases(), verbose=True)
+    b = test_speed(np.fft.fft, test_case.get_large_test_cases(), verbose=True)
+    c = test_speed(scipy_fft, test_case.get_large_test_cases(), verbose=True)
     
     # for test in a:
     #     print(test)

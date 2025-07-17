@@ -41,15 +41,15 @@ def test_fft_speed(testcase, verbose=True):
 
 if __name__ == "__main__":
     print("Warming up...")
-    test_fft_correctness(test_case.simple_test_cases, verbose=False)
+    test_fft_correctness(test_case.get_simple_test_cases(), verbose=False)
     print()
     print("Testing correctness...")
     print()
-    test_fft_correctness(test_case.combined_test_cases, verbose=True)
+    test_fft_correctness(test_case.get_combined_test_cases(), verbose=True)
     print()
     print("Testing speed...")
     print()
-    test_fft_speed(test_case.large_test_cases_extended, verbose=True)
+    test_fft_speed(test_case.get_large_test_cases_extended(), verbose=True)
     print()
     # print("Testing speed (2)...")
     # test_fft_speed(test_case.large_npy_one_case, verbose=True)
