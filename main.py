@@ -38,7 +38,7 @@ fft_functions = {
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-q", "--quiet", help="suppress the test output", action="store_true")
-    parser.add_argument("-m", "--mode", help="test mode: all, check(correctness), speed", choices=["all", "check", "speed"], default="all")
+    parser.add_argument("-m", "--mode", help="test mode: all, metrics, speed", choices=["all", "metrics", "speed"], default="all")
     parser.add_argument("-t", "--table", help="output as table", action="store_true")
     parser.add_argument(
         "-s", "--save-csv",
@@ -50,11 +50,11 @@ def get_args():
     return parser.parse_args()
     
 
-def test_fft_correctness(testcase, verbose=True) -> pl.DataFrame:
+def test_fft_metrics(testcase, verbose=True) -> pl.DataFrame:
     columns = ["func", "test_no", "input_size", "mae", "mse", "is_pass", "is_error"]
     results = []
     for name, func in fft_functions.items():
-        res = test.test_correctness(
+        res = test.test_metrics(
             func, 
             testcase, 
             reference_func=scipy_fft, 
@@ -104,26 +104,26 @@ if __name__ == "__main__":
         
     is_verbose = not is_quiet
     
-    correctness_df = None
+    metrics_df = None
     speed_df = None
 
     
     # Warm up
     qprint(quiet=is_quiet)
     qprint("Warming up...", quiet=is_quiet)
-    test_fft_correctness(test_case.get_simple_test_cases(), verbose=False)
+    test_fft_metrics(test_case.get_simple_test_cases(), verbose=False)
     
-    # Test Correctness
+    # Test metrics
     if args.mode in ["check", "all"]:
         qprint(quiet=is_quiet)
-        qprint("Testing correctness...", quiet=is_quiet)
+        qprint("Testing metrics...", quiet=is_quiet)
         qprint(quiet=is_quiet)
         
-        correctness_df = test_fft_correctness(test_case.get_combined_test_cases(), verbose=is_verbose)
+        metrics_df = test_fft_metrics(test_case.get_combined_test_cases(), verbose=is_verbose)
         if args.table:
             with pl.Config(tbl_rows=-1):
-                qprint("Correctness", quiet=args.quiet)
-                qprint(correctness_df, quiet=args.quiet)
+                qprint("Metrics", quiet=args.quiet)
+                qprint(metrics_df, quiet=args.quiet)
     
     # Test Speed
     if args.mode in ["speed", "all"]:
@@ -150,12 +150,12 @@ if __name__ == "__main__":
         out_dir = Path(RESULT_DIR) / out_dir
         out_dir.mkdir(parents=True, exist_ok=True)
 
-        if correctness_df is not None:
-            path =  out_dir / "correctness.csv"
-            csv_utils.df_to_csv(correctness_df, path)
-            colored_print(f"  💾  Saved correctness results to {path}", quiet=is_quiet, color="CYAN")
+        if metrics_df is not None:
+            path =  out_dir / "metrics.csv"
+            csv_utils.df_to_csv(metrics_df, path)
+            colored_print(f"  💾  Saved metrics results to {path}", quiet=is_quiet, color="CYAN")
 
         if speed_df is not None:
             path = out_dir / "speed.csv"
             csv_utils.df_to_csv(speed_df, path)
-            colored_print(f"  💾  Saved speed       results to {path}", quiet=is_quiet, color="CYAN")
+            colored_print(f"  💾  Saved speed   results to {path}", quiet=is_quiet, color="CYAN")

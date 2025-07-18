@@ -13,7 +13,7 @@ def get_func_name(func: callable):
         return "Function"
 
 
-def test_correctness(func: callable, test_cases: list[np.ndarray], reference_func: callable=scipy_fft, name: str = None, verbose: bool = False):
+def test_metrics(func: callable, test_cases: list[np.ndarray], reference_func: callable=scipy_fft, name: str = None, verbose: bool = False):
     is_quiet = not verbose
     results = []
     
@@ -21,7 +21,7 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
         name = get_func_name(func)
     
     
-    qprint(f"🔍 Correctness Testing: {name}...", is_quiet)
+    qprint(f"🔍 Metrics Testing: {name}...", is_quiet)
     for i, test in enumerate(test_cases):
         res = {
             "func": name,
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     
     import test_case
     
-    a = test_correctness(np.fft.fft, test_case.get_simple_test_cases(), verbose=True)
+    a = test_metrics(np.fft.fft, test_case.get_simple_test_cases(), verbose=True)
     b = test_speed(np.fft.fft, test_case.get_large_test_cases(), verbose=True)
     c = test_speed(scipy_fft, test_case.get_large_test_cases(), verbose=True)
     
