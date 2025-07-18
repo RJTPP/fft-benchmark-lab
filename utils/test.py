@@ -37,7 +37,7 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
             output = func(x)
             expected = reference_func(x)
             mae = np.mean(np.abs(output - expected))
-            mse = np.mean(np.square(output - expected))
+            mse = np.mean(np.abs(output - expected) ** 2)
             
             
             res["expected"] = expected
