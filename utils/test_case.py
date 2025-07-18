@@ -71,6 +71,16 @@ def get_large_test_cases_extended():
     return _large_test_cases_extended
 
 
+_large_test_cases_extended_base4 = None
+def get_large_power_of_four_test_cases():
+    global _large_test_cases_extended_base4
+    if _large_test_cases_extended_base4 is None:
+        _large_test_cases_extended_base4 = [
+            np.random.rand(4**x) + 1j * np.random.rand(4**x) for x in range(1, 10)
+        ]
+    return _large_test_cases_extended_base4
+
+
 _massive_test_cases = None
 def get_massive_test_cases():
     global _massive_test_cases
