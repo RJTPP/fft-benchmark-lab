@@ -44,7 +44,7 @@ project/
 ├── util/
 │   ├── __init__.py
 │   ├── csv_utils.py       # CSV utilities for saving results
-│   ├── io_utols.py        # I/O utilities for colored and silent output
+│   ├── io_utils.py        # I/O utilities for colored and silent output
 │   ├── test_case.py       # Predefined test signals
 │   └── test.py            # Benchmark and correctness wrapper
 │
