@@ -3,11 +3,11 @@
 llvmlite==0.44.0
     # via numba
 numba==0.61.2
-    # via fft-project
+    # via custom-fft-lab
 numpy==2.2.6
     # via
-    #   fft-project
+    #   custom-fft-lab
     #   numba
     #   scipy
 scipy==1.16.0
-    # via fft-project
+    # via custom-fft-lab
