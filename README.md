@@ -68,13 +68,13 @@ cd custom-fft-lab
 
 This project use [`uv`](https://github.com/astral-sh/uv) for package management and installation.
 
-To install the project dependencies, run
+To install the project dependencies, run:
 
 ```bash
 uv sync
 ```
 
-However, you can also use `pip` if preferred
+However, you can also use `pip` if preferred:
 
 ```bash
 pip install -r requirements.txt
