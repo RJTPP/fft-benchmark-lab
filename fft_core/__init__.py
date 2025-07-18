@@ -1,3 +1,5 @@
+"""Core FFT implementation package."""
+
 # fft_core/__init__.py
 import os, importlib
 
