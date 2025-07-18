@@ -14,15 +14,19 @@ logging.getLogger().setLevel(logging.INFO)
 
 import argparse
 import polars as pl
+from datetime import datetime
+from pathlib import Path
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
 from fft_core import fft_functions
-from utils.io_utils import qprint
+from utils.io_utils import qprint, colored_print
 from utils import (
     csv_utils,
     test,
     test_case
 )
+
+RESULT_DIR = "results"
 
 fft_functions = {
     "numpy": numpy_fft,
@@ -36,6 +40,13 @@ def get_args():
     parser.add_argument("-q", "--quiet", help="quiet mode", action="store_true")
     parser.add_argument("-m", "--mode", help="test mode: all, check(correctness), speed", choices=["all", "check", "speed"], default="all")
     parser.add_argument("-t", "--table", help="output as table", action="store_true")
+    parser.add_argument(
+        "-s", "--save-csv",
+        metavar="FILENAME",
+        nargs="?",
+        const=True,  # Temporary placeholder to detect usage without value
+        help="Optionally save results to a CSV file. If no filename is provided, uses results_YYYYMMDD_HHMMSS.csv"
+    )
     return parser.parse_args()
     
 
@@ -93,6 +104,8 @@ if __name__ == "__main__":
         
     is_verbose = not is_quiet
     
+    correctness_df = None
+    speed_df = None
 
     
     # Warm up
@@ -122,3 +135,27 @@ if __name__ == "__main__":
             with pl.Config(tbl_rows=-1):
                 qprint("Speed", quiet=args.quiet)
                 qprint(speed_df, quiet=args.quiet)
+                
+    # Save to CSV
+
+    if args.save_csv:
+        print("\n🗂️  Saving results...\n")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Determine base output directory
+        if args.save_csv is True:
+            out_dir = Path(f"results_{timestamp}")
+        else:
+            out_dir = Path(args.save_csv)
+        out_dir = Path(RESULT_DIR) / out_dir
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        if correctness_df is not None:
+            path =  out_dir / "correctness.csv"
+            csv_utils.df_to_csv(correctness_df, path)
+            colored_print(f"  💾  Saved correctness results to {path}", quiet=is_quiet, color="CYAN")
+
+        if speed_df is not None:
+            path = out_dir / "speed.csv"
+            csv_utils.df_to_csv(speed_df, path)
+            colored_print(f"  💾  Saved speed       results to {path}", quiet=is_quiet, color="CYAN")
