@@ -15,6 +15,7 @@
   - [🚀 Usage](#-usage)
     - [📈 Running Benchmark](#-running-benchmark)
     - [✏️ Custom FFT Implementations](#️-custom-fft-implementations)
+    - [Listing Registered FFT Implementations](#listing-registered-fft-implementations)
   - [📊 Example Output](#-example-output)
   - [📄 License](#-license)
   - [🧑‍💻 Contributors](#-contributors)
@@ -117,10 +118,13 @@ To add a new FFT implementation:
 
 3. The main script will automatically detect `fft_myalgo.fft` and include it in benchmarks.
 
+### Listing Registered FFT Implementations
+
 To list all registered FFT implementations, run:
 
 ```bash
-uv run get_registered_fft.py  
+uv run get_registered_fft.py [-l | --list] [-v | --verbose]
+
 # Or `python get_registered_fft.py`
 ```
 
