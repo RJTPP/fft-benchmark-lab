@@ -23,7 +23,7 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
     for i, test in enumerate(test_cases):
         verbose_output = None
         res = {
-            "name": name,
+            "func": name,
             "test_no": i + 1,
             "input": test,
             "input_size": len(test),
