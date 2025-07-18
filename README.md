@@ -18,7 +18,7 @@ A Python benchmarking toolkit (originally developed for the 01204496-65 DSP cour
     - [Usage](#usage)
     - [Running Benchmark](#running-benchmark)
     - [Optional flags](#optional-flags)
-    - [Custom FFT Implementations](#custom-fft-implementations)
+    - [Custom Implementations](#custom-implementations)
     - [Listing Registered FFT Implementations](#listing-registered-fft-implementations)
   - [📊 Example Output](#-example-output)
     - [Console Output](#console-output)
@@ -104,7 +104,11 @@ python main.py
 - `--minimal` — Reduce test output to minimal
 
 
-### Custom FFT Implementations
+### Custom Implementations
+
+You can benchmark any function that takes a 1D `np.ndarray` and returns a `np.ndarray` (e.g., DFT, FFT, or other spectral transforms). 
+
+By default, results are compared against `scipy.fft.fft`.
 
 To add a new FFT implementation:
 
