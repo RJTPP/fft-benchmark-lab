@@ -1,6 +1,6 @@
 [project]
 name = "custom-fft-lab"
-version = "0.3.0.dev0"
+version = "0.3.0"
 description = "Hands-on exploration and benchmarking of custom FFT implementations"
 authors = [
   { name="Rajata Thamcharoensatit" }
