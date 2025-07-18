@@ -4,7 +4,7 @@ requires-python = ">=3.11"
 
 [[package]]
 name = "custom-fft-lab"
-version = "0.2.1"
+version = "0.3.0.dev0"
 source = { virtual = "." }
 dependencies = [
     { name = "numba" },
