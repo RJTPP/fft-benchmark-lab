@@ -37,7 +37,6 @@ fft_functions = {
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-q", "--quiet", help="suppress the test output", action="store_true")
     parser.add_argument("-m", "--mode", help="test mode: all, metrics, speed", choices=["all", "metrics", "speed"], default="all")
     parser.add_argument("-t", "--table", help="output as table", action="store_true")
     parser.add_argument(
@@ -47,6 +46,7 @@ def get_args():
         const=True,  # Temporary placeholder to detect usage without value
         help="Optionally save results to a CSV file. If no filename is provided, uses results_YYYYMMDD_HHMMSS.csv"
     )
+    parser.add_argument("--minimal", help="Reduce output verbosity during tests", action="store_true")
     return parser.parse_args()
     
 
@@ -93,7 +93,7 @@ def test_fft_speed(testcase, verbose=True) -> pl.DataFrame:
 if __name__ == "__main__":
     # Handle args
     args = get_args()
-    is_quiet = args.quiet
+    is_quiet = args.minimal
     
     if is_quiet:
         logging.getLogger().setLevel(logging.ERROR)
@@ -153,9 +153,9 @@ if __name__ == "__main__":
         if metrics_df is not None:
             path =  out_dir / "metrics.csv"
             csv_utils.df_to_csv(metrics_df, path)
-            colored_print(f"  💾  Saved metrics results to {path}", quiet=is_quiet, color="CYAN")
+            colored_print(f"  💾  Saved metrics results to {path}", color="CYAN")
 
         if speed_df is not None:
             path = out_dir / "speed.csv"
             csv_utils.df_to_csv(speed_df, path)
-            colored_print(f"  💾  Saved speed   results to {path}", quiet=is_quiet, color="CYAN")
+            colored_print(f"  💾  Saved speed   results to {path}", color="CYAN")
