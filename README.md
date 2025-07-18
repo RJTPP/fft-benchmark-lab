@@ -99,7 +99,7 @@ python main.py
 
 #### Optional flags
 
-- `--mode [all|check|speed]` — Run only correctness tests, speed tests, or both (default: all)
+- `--mode [all|check|speed]` — Run only metrics tests, speed tests, or both (default: all)
 - `--save-csv [DIR]` — Save results to a timestamped directory (e.g., `results_20250101_000000/`)
   - If no directory is provided, a default folder will be created
 - `--minimal` — Reduce test output to minimal
