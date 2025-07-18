@@ -16,8 +16,13 @@ import argparse
 import polars as pl
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
-from utils import test, test_case, csv_utils
 from fft_core import fft_functions
+from utils.io_utils import qprint
+from utils import (
+    csv_utils,
+    test,
+    test_case
+)
 
 fft_functions = {
     "numpy": numpy_fft,
@@ -32,11 +37,6 @@ def get_args():
     parser.add_argument("-m", "--mode", help="test mode: all, check(correctness), speed", choices=["all", "check", "speed"], default="all")
     parser.add_argument("-t", "--table", help="output as table", action="store_true")
     return parser.parse_args()
-
-
-def qprint(output="", quiet=False, **kwargs):
-    if not quiet:
-        print(output, **kwargs)
     
 
 def test_fft_correctness(testcase, verbose=True) -> pl.DataFrame:
