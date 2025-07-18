@@ -20,11 +20,11 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
     
     if verbose:
         print(f"🔍 Correctness Testing: {name}...")
-    for i, x in enumerate(test_cases):
+    for i, test in enumerate(test_cases):
         verbose_output = None
         res = {
             "no": i + 1,
-            "input": x,
+            "input": test,
             "expected": None,
             "output": None,
             "mae": None,
@@ -34,8 +34,8 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
         }
         
         try:
-            output = func(x)
-            expected = reference_func(x)
+            output = func(test)
+            expected = reference_func(test)
             mae = np.mean(np.abs(output - expected))
             mse = np.mean(np.abs(output - expected) ** 2)
             
@@ -47,15 +47,15 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
             
             assert np.allclose(output, expected, rtol=1e-5, atol=1e-8)
             
-            verbose_output = f"  ✅ Test case {i + 1}: PASS (MAE: {mae:.2g}, MSE: {mse:.2g})"
+            verbose_output = f"  ✅ Test case {i + 1:>2} (size: {len(test):>8}): PASS -> MAE: {mae:<8.2g}, MSE: {mse:>8.2g}"
             res["is_pass"] = True
             res["is_error"] = False
         except AssertionError:
-            verbose_output = f"  ❌ Test case {i + 1}: FAIL (MAE: {mae:.2g}, MSE: {mse:.2g})"
+            verbose_output = f"  ❌ Test case {i + 1:>2} (size: {len(test):>8}): FAIL -> MAE: {mae:<8.2g}, MSE: {mse:>8.2g}"
             res["is_pass"] = False
             res["is_error"] = False
         except Exception as e:
-            verbose_output = f"  💥 Test case {i + 1}: ERROR ({e})"
+            verbose_output = f"  💥 Test case {i + 1:>2} (size: {len(test):>8}): ERROR ({e})"
             res["is_pass"] = False
             res["is_error"] = True
         
