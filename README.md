@@ -11,9 +11,9 @@
   - [✨ Features](#-features)
   - [📂 Project Structure](#-project-structure)
   - [📥 Getting Started](#-getting-started)
-  - [🔧 Installation](#-installation)
-  - [🚀 Usage](#-usage)
-    - [📈 Running Benchmark](#-running-benchmark)
+    - [🔧 Installation](#-installation)
+    - [🚀 Usage](#-usage)
+      - [Running Benchmark](#running-benchmark)
       - [Optional flags](#optional-flags)
     - [✏️ Custom FFT Implementations](#️-custom-fft-implementations)
     - [Listing Registered FFT Implementations](#listing-registered-fft-implementations)
@@ -56,15 +56,17 @@ project/
 
 ## 📥 Getting Started
 
-Clone this repository:
+
+### 🔧 Installation
+
+**Clone this repository:**
 
 ```bash
 git clone https://github.com/your-username/custom-fft-lab.git
 cd custom-fft-lab
 ```
 
-
-## 🔧 Installation
+**Install Dependencies**
 
 This project use [`uv`](https://github.com/astral-sh/uv) for package management and installation.
 
@@ -81,9 +83,9 @@ pip install -r requirements.txt
 ```
 
 
-## 🚀 Usage
+### 🚀 Usage
 
-### 📈 Running Benchmark
+#### Running Benchmark
 
 To run the benchmark tests, execute the main script:
 
