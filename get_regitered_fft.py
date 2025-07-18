@@ -4,12 +4,12 @@ from fft_core import fft_functions
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--verbose", "-v", action="store_true")
-parser.add_argument("--as-list", "-l", action="store_true")
+parser.add_argument("-v", "--verbose", help="print verbose output", action="store_true")
+parser.add_argument("-l", "--list", help="print python list of FFT implementations", action="store_true")
 args = parser.parse_args()
 
-if args.as_list and args.verbose:
-    print("WARNING: --as-list and --verbose are mutually exclusive. Using --as-list.")
+if args.list and args.verbose:
+    print("WARNING: --list and --verbose are mutually exclusive. Using --as-list.")
     print()
 
 if not fft_functions:
@@ -18,7 +18,7 @@ if not fft_functions:
 
 print(f"Found {len(fft_functions)} registered FFT implementations:\n")
 
-if args.as_list:
+if args.list:
     print(f"{list(fft_functions.keys())}".replace("\'", '\"'))
     exit(0)
     

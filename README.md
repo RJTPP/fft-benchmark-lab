@@ -11,10 +11,12 @@
   - [✨ Features](#-features)
   - [📂 Project Structure](#-project-structure)
   - [📥 Getting Started](#-getting-started)
-  - [🔧 Installation](#-installation)
-  - [🚀 Usage](#-usage)
-    - [📈 Running Benchmark](#-running-benchmark)
+    - [🔧 Installation](#-installation)
+    - [🚀 Usage](#-usage)
+      - [Running Benchmark](#running-benchmark)
+      - [Optional flags](#optional-flags)
     - [✏️ Custom FFT Implementations](#️-custom-fft-implementations)
+    - [Listing Registered FFT Implementations](#listing-registered-fft-implementations)
   - [📊 Example Output](#-example-output)
   - [📄 License](#-license)
   - [🧑‍💻 Contributors](#-contributors)
@@ -23,8 +25,9 @@
 ## ✨ Features
 
 * Recursive and iterative FFT implementations in `fft_core/`
-* Performance benchmarking with configurable tolerance and timing in `util/test.py`
-* Test signals defined in `util/test_case.py`
+* Performance and metrics benchmarking with optional CSV export (MAE, MSE, correctness)
+* Configurable test mode: metrics-only, speed-only, or both
+* Colorized CLI output
 * Simple CLI entry point in `main.py`
 
 
@@ -53,34 +56,36 @@ project/
 
 ## 📥 Getting Started
 
-Clone this repository:
+
+### 🔧 Installation
+
+**Clone this repository:**
 
 ```bash
 git clone https://github.com/your-username/custom-fft-lab.git
 cd custom-fft-lab
 ```
 
-
-## 🔧 Installation
+**Install Dependencies**
 
 This project use [`uv`](https://github.com/astral-sh/uv) for package management and installation.
 
-To install the project dependencies, run
+To install the project dependencies, run:
 
 ```bash
 uv sync
 ```
 
-However, you can also use `pip` if preferred
+However, you can also use `pip` if preferred:
 
 ```bash
 pip install -r requirements.txt
 ```
 
 
-## 🚀 Usage
+### 🚀 Usage
 
-### 📈 Running Benchmark
+#### Running Benchmark
 
 To run the benchmark tests, execute the main script:
 
@@ -93,6 +98,13 @@ Or if you prefer using `python`:
 ```bash
 python main.py
 ```
+
+#### Optional flags
+
+- `--mode [all|check|speed]` — Run only metrics tests, speed tests, or both (default: all)
+- `--save-csv [DIR]` — Save results to a timestamped directory (e.g., `results_20250101_000000/`)
+  - If no directory is provided, a default folder will be created
+- `--minimal` — Reduce test output to minimal
 
 
 ### ✏️ Custom FFT Implementations
@@ -117,10 +129,13 @@ To add a new FFT implementation:
 
 3. The main script will automatically detect `fft_myalgo.fft` and include it in benchmarks.
 
+### Listing Registered FFT Implementations
+
 To list all registered FFT implementations, run:
 
 ```bash
-uv run get_registered_fft.py  
+uv run get_registered_fft.py [-l | --list] [-v | --verbose]
+
 # Or `python get_registered_fft.py`
 ```
 
@@ -134,6 +149,10 @@ uv run get_registered_fft.py
 🕐 Speed Testing: simple_fft...
   ✅ Time (size: 1024): 17.92 µs (avg per bin: 0.018 µs)
   ✅ Time (size: 2048): 42.68 µs (avg per bin: 0.021 µs)
+
+🗂️  Saving results...
+  💾  Saved metrics results to results/results_20250101_000000/metrics.csv
+  💾  Saved speed   results to results/results_20250101_000000/speed.csv
 ```
 
 
