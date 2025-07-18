@@ -1,35 +1,30 @@
-# ⚡ FFT Project
+# ⚡ FFT Benchmark Lab
 
-**This project was developed as part of the 01204496-65 Algorithmic-Oriented Digital Signal Processing for Computer Engineers course at Kasetsart University.**
+A Python benchmarking toolkit (originally developed for the 01204496-65 DSP course at Kasetsart University) for evaluating custom FFT implementations against SciPy.  
 
- It demonstrates how the Fast Fourier Transform (FFT) works through practical Python implementations, comparing performance and accuracy against `numpy.fft` and `scipy.fft` functions.
+**Key capabilities:**
+- Hand-written FFT algorithms (recursive, iterative, radix-4, etc.)  
+- Automated error analysis (MAE, MSE, pass/fail) and speed benchmarking  
+- CLI controls: `--mode`, `--minimal`, `--save-csv`  
+- Colorized terminal output and organized, timestamped CSV results  
 
 ## 📜 Table of Contents
 
-- [⚡ FFT Project](#-fft-project)
+- [⚡ FFT Benchmark Lab](#-fft-benchmark-lab)
   - [📜 Table of Contents](#-table-of-contents)
-  - [✨ Features](#-features)
   - [📂 Project Structure](#-project-structure)
   - [📥 Getting Started](#-getting-started)
-    - [🔧 Installation](#-installation)
-    - [🚀 Usage](#-usage)
-      - [Running Benchmark](#running-benchmark)
-      - [Optional flags](#optional-flags)
-    - [✏️ Custom FFT Implementations](#️-custom-fft-implementations)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Running Benchmark](#running-benchmark)
+    - [Optional flags](#optional-flags)
+    - [Custom FFT Implementations](#custom-fft-implementations)
     - [Listing Registered FFT Implementations](#listing-registered-fft-implementations)
   - [📊 Example Output](#-example-output)
+    - [Console Output](#console-output)
+    - [CSV Output Format](#csv-output-format)
   - [📄 License](#-license)
   - [🧑‍💻 Contributors](#-contributors)
-
-
-## ✨ Features
-
-* Recursive and iterative FFT implementations in `fft_core/`
-* Performance and metrics benchmarking with optional CSV export (MAE, MSE, correctness)
-* Configurable test mode: metrics-only, speed-only, or both
-* Colorized CLI output
-* Simple CLI entry point in `main.py`
-
 
 
 ## 📂 Project Structure
@@ -59,13 +54,13 @@ project/
 ## 📥 Getting Started
 
 
-### 🔧 Installation
+### Installation
 
 **Clone this repository:**
 
 ```bash
-git clone https://github.com/your-username/custom-fft-lab.git
-cd custom-fft-lab
+git clone https://github.com/your-username/fft-benchmark-lab.git
+cd fft-benchmark-lab
 ```
 
 **Install Dependencies**
@@ -85,9 +80,9 @@ pip install -r requirements.txt
 ```
 
 
-### 🚀 Usage
+### Usage
 
-#### Running Benchmark
+### Running Benchmark
 
 To run the benchmark tests, execute the main script:
 
@@ -101,7 +96,7 @@ Or if you prefer using `python`:
 python main.py
 ```
 
-#### Optional flags
+### Optional flags
 
 - `--mode [all|check|speed]` — Run only metrics tests, speed tests, or both (default: all)
 - `--save-csv [DIR]` — Save results to a timestamped directory (e.g., `results_20250101_000000/`)
@@ -109,7 +104,7 @@ python main.py
 - `--minimal` — Reduce test output to minimal
 
 
-### ✏️ Custom FFT Implementations
+### Custom FFT Implementations
 
 To add a new FFT implementation:
 
@@ -143,6 +138,8 @@ uv run get_registered_fft.py [-l | --list] [-v | --verbose]
 
 ## 📊 Example Output
 
+### Console Output
+
 ```
 🔍 Correctness Testing: simple_fft...
   ✅ Test case 1: PASS (MAE: 0, MSE: 0+0j)
@@ -156,6 +153,32 @@ uv run get_registered_fft.py [-l | --list] [-v | --verbose]
   💾  Saved metrics results to results/results_20250101_000000/metrics.csv
   💾  Saved speed   results to results/results_20250101_000000/speed.csv
 ```
+
+### CSV Output Format
+
+**metrics.csv** (in `<out_dir>/metrics.csv`):
+
+```csv
+func,test_no,input_size,mae,mse,is_pass,is_error
+```
+
+- **func**: FFT function name  
+- **test_no**: index of the test case  
+- **input_size**: signal length  
+- **mae**: mean absolute error  
+- **mse**: mean squared error  
+- **is_pass**: whether the result matched tolerance (`true`/`false`)  
+- **is_error**: whether an exception occurred (`true`/`false`)  
+
+**speed.csv** (in `<out_dir>/speed.csv`):
+
+```csv
+metric,func,test_no,input_size,time_used_us,time_per_bin_us,is_error
+```
+
+- **time_used_us**: total execution time in microseconds  
+- **time_per_bin_us**: average time per FFT bin  
+- **is_error**: whether an exception occurred during timing (`true`/`false`)  
 
 
 ## 📄 License
