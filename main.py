@@ -37,7 +37,7 @@ fft_functions = {
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-q", "--quiet", help="quiet mode", action="store_true")
+    parser.add_argument("-q", "--quiet", help="suppress the test output", action="store_true")
     parser.add_argument("-m", "--mode", help="test mode: all, check(correctness), speed", choices=["all", "check", "speed"], default="all")
     parser.add_argument("-t", "--table", help="output as table", action="store_true")
     parser.add_argument(
