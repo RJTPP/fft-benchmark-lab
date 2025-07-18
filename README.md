@@ -14,6 +14,7 @@
   - [🔧 Installation](#-installation)
   - [🚀 Usage](#-usage)
     - [📈 Running Benchmark](#-running-benchmark)
+      - [Optional flags](#optional-flags)
     - [✏️ Custom FFT Implementations](#️-custom-fft-implementations)
     - [Listing Registered FFT Implementations](#listing-registered-fft-implementations)
   - [📊 Example Output](#-example-output)
@@ -24,8 +25,9 @@
 ## ✨ Features
 
 * Recursive and iterative FFT implementations in `fft_core/`
-* Performance benchmarking with configurable tolerance and timing in `util/test.py`
-* Test signals defined in `util/test_case.py`
+* Performance and metrics benchmarking with optional CSV export (MAE, MSE, correctness)
+* Configurable test mode: metrics-only, speed-only, or both
+* Colorized CLI output
 * Simple CLI entry point in `main.py`
 
 
@@ -95,6 +97,13 @@ Or if you prefer using `python`:
 python main.py
 ```
 
+#### Optional flags
+
+- `--mode [all|check|speed]` — Run only correctness tests, speed tests, or both (default: all)
+- `--save-csv [DIR]` — Save results to a timestamped directory (e.g., `results_20250101_000000/`)
+  - If no directory is provided, a default folder will be created
+- `--minimal` — Reduce test output to minimal
+
 
 ### ✏️ Custom FFT Implementations
 
@@ -138,6 +147,10 @@ uv run get_registered_fft.py [-l | --list] [-v | --verbose]
 🕐 Speed Testing: simple_fft...
   ✅ Time (size: 1024): 17.92 µs (avg per bin: 0.018 µs)
   ✅ Time (size: 2048): 42.68 µs (avg per bin: 0.021 µs)
+
+🗂️  Saving results...
+  💾  Saved metrics results to results/results_20250101_000000/metrics.csv
+  💾  Saved speed   results to results/results_20250101_000000/speed.csv
 ```
 
 
