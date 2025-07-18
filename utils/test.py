@@ -23,8 +23,10 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
     for i, test in enumerate(test_cases):
         verbose_output = None
         res = {
-            "no": i + 1,
+            "name": name,
+            "test_no": i + 1,
             "input": test,
+            "input_size": len(test),
             "expected": None,
             "output": None,
             "mae": None,
@@ -87,8 +89,10 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None, v
     for i, test in enumerate(test_cases):
         verbose_output = None
         res = {
-            "no": i + 1,
+            "func": name,
+            "test_no": i + 1,
             "input": test,
+            "input_size": len(test),
             "time_used_us": None,
             "time_per_bin_us": None,
             "is_error": False
@@ -130,6 +134,20 @@ if __name__ == "__main__":
     a = test_correctness(np.fft.fft, test_case.get_simple_test_cases(), verbose=True)
     b = test_speed(np.fft.fft, test_case.get_large_test_cases(), verbose=True)
     c = test_speed(scipy_fft, test_case.get_large_test_cases(), verbose=True)
+    
+    data = []
+    for x in [a, a]:
+        data.extend(x)
+    
+    columns = ["name", "test_no", "input_size", "mae", "mse", "is_pass", "is_error"]
+    data = [
+        [
+            x[y] for y in columns
+        ]
+        for x in sorted(data, key=lambda x: (x["name"], x["test_no"]))
+        ]
+    import polars as pl
+    print(pl.DataFrame(data, schema=columns))
     
     # for test in a:
     #     print(test)
