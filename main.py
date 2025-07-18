@@ -139,7 +139,7 @@ if __name__ == "__main__":
     # Save to CSV
 
     if args.save_csv:
-        print("\n🗂️  Saving results...\n")
+        print("\n🗂️  Saving results...")
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         # Determine base output directory
