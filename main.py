@@ -46,6 +46,7 @@ def test_fft_correctness(testcase, verbose=True):
             verbose=verbose,
         )
 
+
 def test_fft_speed(testcase, verbose=True):
     for name, func in fft_functions.items():
         test.test_speed(
@@ -57,20 +58,30 @@ def test_fft_speed(testcase, verbose=True):
 
 
 if __name__ == "__main__":
-    # TODO: Update README
-    # print(fft_functions)
-    print()
-    print("Warming up...")
+    args = get_args()
+    is_quiet = args.quiet
+    is_verbose = not is_quiet
+    
+    if is_quiet:
+        logging.getLogger().setLevel(logging.ERROR)
+    
+    qprint(quiet=is_quiet)
+    qprint("Warming up...", quiet=is_quiet)
     test_fft_correctness(test_case.get_simple_test_cases(), verbose=False)
-    print()
-    print("Testing correctness...")
-    print()
-    test_fft_correctness(test_case.get_combined_test_cases(), verbose=True)
-    print()
-    print("Testing speed...")
-    print()
-    test_fft_speed(test_case.get_large_test_cases_extended(), verbose=True)
-    # test_fft_speed(test_case.get_large_power_of_four_test_cases(), verbose=True)
-    print()
+    
+    qprint(quiet=is_quiet)
+    qprint("Testing correctness...", quiet=is_quiet)
+    
+    qprint(quiet=is_quiet)
+    test_fft_correctness(test_case.get_combined_test_cases(), verbose=is_verbose)
+    
+    qprint(quiet=is_quiet)
+    qprint("Testing speed...", quiet=is_quiet)
+    
+    qprint(quiet=is_quiet)
+    test_fft_speed(test_case.get_large_test_cases_extended(), verbose=is_verbose)
+    # test_fft_speed(test_case.get_large_power_of_four_test_cases(), verbose=is_verbose)
+    
+    qprint(quiet=is_quiet)
     # print("Testing speed (2)...")
     # test_fft_speed(test_case.large_npy_one_case, verbose=True)
