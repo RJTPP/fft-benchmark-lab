@@ -1,3 +1,5 @@
+"""Mechanism for registering FFT implementations."""
+
 import logging
 
 logger = logging.getLogger(__name__)

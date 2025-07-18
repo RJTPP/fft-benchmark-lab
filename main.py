@@ -1,3 +1,5 @@
+"""Main script for testing FFT implementations."""
+
 import logging
 
 # 1. Configure the root logger:

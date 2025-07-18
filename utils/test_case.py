@@ -1,3 +1,5 @@
+"""Functions for generating test cases for FFT implementations."""
+
 import numpy as np
 
 _simple_test_cases = [

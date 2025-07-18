@@ -1,3 +1,5 @@
+"""This script lists the registered FFT implementations."""
+
 from fft_core import fft_functions
 import argparse
 
@@ -17,7 +19,7 @@ if not fft_functions:
 print(f"Found {len(fft_functions)} registered FFT implementations:\n")
 
 if args.as_list:
-    print(f"{list(fft_functions.keys())}".replace("\'", "\""))
+    print(f"{list(fft_functions.keys())}".replace("\'", '\"'))
     exit(0)
     
 for i, (name, func) in enumerate(fft_functions.items()):
