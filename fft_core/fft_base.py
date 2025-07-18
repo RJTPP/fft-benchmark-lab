@@ -18,7 +18,7 @@ def naiveDFT(x):
 
     return X
 
-@register_fft(name="recursive")
+# @register_fft(name="recursive")
 def fft_recursive(x: np.ndarray):
     """
     Fast Fourier Transform (FFT) using the recursive Radix-2 Cooley-Tukey algorithm.
