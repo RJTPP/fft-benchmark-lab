@@ -3,6 +3,7 @@
 import numpy as np
 from scipy.fft import fft as scipy_fft
 from time import perf_counter
+from .io_utils import qprint, colored_print
 
 
 def get_func_name(func: callable):
@@ -13,15 +14,15 @@ def get_func_name(func: callable):
 
 
 def test_correctness(func: callable, test_cases: list[np.ndarray], reference_func: callable=scipy_fft, name: str = None, verbose: bool = False):
+    is_quiet = not verbose
     results = []
     
     if name is None:
         name = get_func_name(func)
     
-    if verbose:
-        print(f"🔍 Correctness Testing: {name}...")
+    
+    qprint(f"🔍 Correctness Testing: {name}...", is_quiet)
     for i, test in enumerate(test_cases):
-        verbose_output = None
         res = {
             "func": name,
             "test_no": i + 1,
@@ -49,33 +50,31 @@ def test_correctness(func: callable, test_cases: list[np.ndarray], reference_fun
             
             assert np.allclose(output, expected, rtol=1e-5, atol=1e-8)
             
-            verbose_output = f"  ✅ Test case {i + 1:>2} (size: {len(test):>8}): PASS -> MAE: {mae:<8.2g}, MSE: {mse:>8.2g}"
+            colored_print(f"  ✅ Test case {i + 1:>2} (size: {len(test):>8}): PASS -> MAE: {mae:<8.2g}, MSE: {mse:>8.2g}", color="GREEN",quiet=is_quiet)
             res["is_pass"] = True
             res["is_error"] = False
         except AssertionError:
-            verbose_output = f"  ❌ Test case {i + 1:>2} (size: {len(test):>8}): FAIL -> MAE: {mae:<8.2g}, MSE: {mse:>8.2g}"
+            colored_print(f"  ❌ Test case {i + 1:>2} (size: {len(test):>8}): FAIL -> MAE: {mae:<8.2g}, MSE: {mse:>8.2g}", color="RED", quiet=is_quiet)
             res["is_pass"] = False
             res["is_error"] = False
         except Exception as e:
-            verbose_output = f"  💥 Test case {i + 1:>2} (size: {len(test):>8}): ERROR ({e})"
+            colored_print(f"  💥 Test case {i + 1:>2} (size: {len(test):>8}): ERROR ({e})", color="YELLOW",quiet=is_quiet)
             res["is_pass"] = False
             res["is_error"] = True
         
-        if verbose and verbose_output is not None:
-            print(verbose_output)
         results.append(res)
         
     return results
 
 
 def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None, verbose: bool = False):
+    is_quiet = not verbose
     results = []
     
     if name is None:
         name = get_func_name(func)
         
-    if verbose:
-        print(f"🕐 Speed Testing: {name}...")
+    qprint(f"🕐 Speed Testing: {name}...", is_quiet)
     
     # Warmup
     warmup_input = np.random.rand(256) + 1j * np.random.rand(256)
@@ -87,7 +86,6 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None, v
     
     # Run
     for i, test in enumerate(test_cases):
-        verbose_output = None
         res = {
             "func": name,
             "test_no": i + 1,
@@ -109,16 +107,14 @@ def test_speed(func: callable, test_cases: list[np.ndarray], name: str = None, v
             # Output
             is_exceed_thousands = time_used_us > 1000
             unit_str = "ms" if is_exceed_thousands else "µs"
-            verbose_output = f"  ✅ Time (size: {len(test):>8}): {time_used_us if not is_exceed_thousands else time_used_us/1000:>8.2f} {unit_str} (avg per bin: {avg_time_us:.3f} µs)"
+            colored_print(f"  ✅ Time (size: {len(test):>8}): {time_used_us if not is_exceed_thousands else time_used_us/1000:>8.2f} {unit_str} (avg per bin: {avg_time_us:.3f} µs)", color="GREEN", quiet=is_quiet)
             res["time_used_us"] = time_used_us
             res["time_per_bin_us"] = avg_time_us
             res["is_error"] = False
         except Exception as e:
-            verbose_output = f"  💥 Time: ERROR ({e})"
+            colored_print(f"  💥 Time: ERROR ({e})", color="YELLOW", quiet=is_quiet)
             res["is_error"] = True
             
-        if verbose and verbose_output is not None:
-            print(verbose_output)
         results.append(res)
         
     return results
