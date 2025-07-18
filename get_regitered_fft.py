@@ -1,7 +1,8 @@
 """This script lists the registered FFT implementations."""
 
-from fft_core import fft_functions
 import argparse
+
+from fft_core import fft_functions
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--verbose", help="print verbose output", action="store_true")

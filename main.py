@@ -13,18 +13,16 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 import argparse
-import polars as pl
 from datetime import datetime
 from pathlib import Path
+
+import polars as pl
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
+
 from fft_core import fft_functions
-from utils.io_utils import qprint, colored_print
-from utils import (
-    csv_utils,
-    test,
-    test_case
-)
+from utils import csv_utils, test, test_case
+from utils.io_utils import colored_print, qprint
 
 RESULT_DIR = "results"
 

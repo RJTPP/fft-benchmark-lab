@@ -1,9 +1,11 @@
 """Functions for testing FFT implementations."""
 
+from time import perf_counter
+
 import numpy as np
 from scipy.fft import fft as scipy_fft
-from time import perf_counter
-from .io_utils import qprint, colored_print
+
+from .io_utils import colored_print, qprint
 
 
 def get_func_name(func: callable):

@@ -1,8 +1,10 @@
 """Numba-optimized FFT implementations."""
 
-from .selection import register_fft
 import numpy as np
 from numba import njit
+
+from .selection import register_fft
+
 
 @njit(cache=True)
 def bit_reverse_indices(n: int) -> np.ndarray:

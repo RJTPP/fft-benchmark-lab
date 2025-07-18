@@ -1,8 +1,9 @@
 """Utility functions for CSV related tasks."""
 
 from pathlib import Path
-import polars as pl
+
 import pandas as pd
+import polars as pl
 
 
 def read_csv_df(path: str | Path, use_pandas: bool = False) -> pl.DataFrame | pd.DataFrame:

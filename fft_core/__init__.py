@@ -1,7 +1,8 @@
 """Core FFT implementation package."""
 
 # fft_core/__init__.py
-import os, importlib
+import importlib
+import os
 
 # import every module so decorators run
 _pkg = __name__

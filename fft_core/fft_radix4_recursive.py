@@ -1,5 +1,6 @@
-from .selection import register_fft
 import numpy as np
+
+from .selection import register_fft
 
 
 def fft_radix4_recursive(x: np.ndarray):

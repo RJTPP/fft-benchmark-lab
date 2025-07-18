@@ -1,7 +1,8 @@
 """Base FFT implementations."""
 
-from .selection import register_fft
 import numpy as np
+
+from .selection import register_fft
 
 
 # @register_fft

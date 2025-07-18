@@ -1,7 +1,9 @@
 """Iterative FFT implementations."""
 
-from .selection import register_fft
 import numpy as np
+
+from .selection import register_fft
+
 
 # @register_fft(name="iterative")
 def fft_iterative(x: np.ndarray) -> np.ndarray:

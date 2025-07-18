@@ -1,7 +1,7 @@
-from .selection import register_fft
 import numpy as np
 
-import numpy as np
+from .selection import register_fft
+
 
 def radix2_bit_reversal(x: np.ndarray) -> np.ndarray:
     """

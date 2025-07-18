@@ -1,6 +1,7 @@
-from .selection import register_fft
 import numpy as np
-from numba import njit, jit
+from numba import jit, njit
+
+from .selection import register_fft
 
 
 @njit(cache=True)

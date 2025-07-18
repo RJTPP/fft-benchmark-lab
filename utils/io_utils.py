@@ -1,7 +1,8 @@
 """Utility functions for I/O tasks like conditional and colored printing."""
 
 try:
-    from colorama import Fore, Style, init as colorama_init
+    from colorama import Fore, Style
+    from colorama import init as colorama_init
     colorama_init(autoreset=True)
 except ImportError:
     print("WARNING: colorama is not installed. Colorized output will not be available.")
