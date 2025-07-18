@@ -35,19 +35,20 @@
 project/
 ├── fft_core/
 │   ├── __init__.py
-│   ├── selection.py   # Helper file for importing FFT implementations
-│   └── ...            # FFT implementations
+│   ├── selection.py       # Helper file for importing FFT implementations
+│   └── ...                # FFT implementations
 │
 ├── util/
 │   ├── __init__.py
-│   ├── test_case.py   # Predefined test signals
-│   └── test.py        # Benchmark and correctness wrapper
+│   ├── test_case.py       # Predefined test signals
+│   └── test.py            # Benchmark and correctness wrapper
 │
-├── main.py            # CLI entry point for benchmarking
-├── README.md          # Project overview (this file)
-├── uv.lock            # uv package lock file
-├── requirements.txt   # Python dependencies (if not using uv)
-└── pyproject.toml     # Project metadata
+├── get_registered_fft.py  # CLI for listing registered FFT implementations
+├── main.py                # CLI entry point for benchmarking
+├── README.md              # Project overview (this file)
+├── uv.lock                # uv package lock file
+├── requirements.txt       # Python dependencies (if not using uv)
+└── pyproject.toml         # Project metadata
 ```
 
 ## 📥 Getting Started
@@ -116,6 +117,12 @@ To add a new FFT implementation:
 
 3. The main script will automatically detect `fft_myalgo.fft` and include it in benchmarks.
 
+To list all registered FFT implementations, run:
+
+```bash
+uv run get_registered_fft.py  
+# Or `python get_registered_fft.py`
+```
 
 ## 📊 Example Output
 
