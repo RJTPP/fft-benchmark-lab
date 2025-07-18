@@ -12,6 +12,7 @@ logging.basicConfig(
 logging.getLogger().setLevel(logging.INFO)
 
 
+import argparse
 from numpy.fft import fft as numpy_fft
 from scipy.fft import fft as scipy_fft
 from utils import test, test_case
@@ -22,6 +23,18 @@ fft_functions = {
     "scipy": scipy_fft,
     **fft_functions
 }
+
+
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-q", "--quiet", help="quiet mode", action="store_true")
+    return parser.parse_args()
+
+
+def qprint(output="", quiet=False, **kwargs):
+    if not quiet:
+        print(output, **kwargs)
+    
 
 def test_fft_correctness(testcase, verbose=True):
     for name, func in fft_functions.items():
