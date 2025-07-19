@@ -103,7 +103,7 @@ def fft_radix4_iterative(x: np.ndarray) -> np.ndarray:
     return X
 
 
-@register_fft(name="mixed_radix_iterative")
+# @register_fft(name="mixed_radix_iterative")
 def fft_mixed_radix_iterative(x: np.ndarray) -> np.ndarray:
     """
     FFT using a mixed-radix (4 and 2) iterative Cooley-Tukey algorithm.
