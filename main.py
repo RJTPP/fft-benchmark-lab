@@ -128,7 +128,7 @@ if __name__ == "__main__":
         qprint(quiet=is_quiet)
         qprint("Testing speed...", quiet=is_quiet)
         qprint(quiet=is_quiet)
-        speed_df = test_fft_speed(test_case.get_large_test_cases_extended(), verbose=is_verbose)
+        speed_df = test_fft_speed(test_case.get_massive_test_cases(), verbose=is_verbose)
         if args.table:
             with pl.Config(tbl_rows=-1):
                 qprint("Speed", quiet=args.quiet)
