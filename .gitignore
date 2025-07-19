@@ -1,5 +1,5 @@
 .DS_Store
 .python-version
 *.pyc
-*/__pycache__
+*__pycache__
 /results
