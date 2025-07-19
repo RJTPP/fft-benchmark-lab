@@ -135,25 +135,41 @@ if __name__ == "__main__":
                 qprint(speed_df, quiet=args.quiet)
                 
     # Save to CSV
-
     if args.save_csv:
-        print("\n🗂️  Saving results...")
+        print("\n🗂️  Saving results…")
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         # Determine base output directory
-        if args.save_csv is True:
-            out_dir = Path(f"results_{timestamp}")
-        else:
-            out_dir = Path(args.save_csv)
-        out_dir = Path(RESULT_DIR) / out_dir
-        out_dir.mkdir(parents=True, exist_ok=True)
+        base_dir = Path(RESULT_DIR) / (args.save_csv is True and f"results_{timestamp}" or args.save_csv)
+        base_dir.mkdir(parents=True, exist_ok=True)
 
+        # Create sub-dirs
+        metrics_dir = base_dir / "metrics"
+        speed_dir   = base_dir / "speed"
+        metrics_dir.mkdir(exist_ok=True)
+        speed_dir.mkdir(exist_ok=True)
+
+        # Save combined CSVs
         if metrics_df is not None:
-            path =  out_dir / "metrics.csv"
-            csv_utils.df_to_csv(metrics_df, path)
-            colored_print(f"  💾  Saved metrics results to {path}", color="CYAN")
+            combined_metrics = base_dir / "metrics.csv"
+            csv_utils.df_to_csv(metrics_df, combined_metrics)
+            colored_print(f"  💾  Saved {'combined':<20} metrics to {combined_metrics}", color="CYAN")
+
+            # Per-function metrics
+            for func in metrics_df["func"].unique():
+                func_df  = metrics_df.filter(pl.col("func") == func)
+                func_path = metrics_dir / f"{func}_metrics.csv"
+                csv_utils.df_to_csv(func_df, func_path)
+                colored_print(f"  💾  Saved {func:<20} metrics to {func_path}", color="CYAN")
 
         if speed_df is not None:
-            path = out_dir / "speed.csv"
-            csv_utils.df_to_csv(speed_df, path)
-            colored_print(f"  💾  Saved speed   results to {path}", color="CYAN")
+            combined_speed = base_dir / "speed.csv"
+            csv_utils.df_to_csv(speed_df, combined_speed)
+            colored_print(f"  💾  Saved {'combined':<20} speed to {combined_speed}", color="CYAN")
+
+            # Per-function speed
+            for func in speed_df["func"].unique():
+                func_df  = speed_df.filter(pl.col("func") == func)
+                func_path = speed_dir / f"{func}_speed.csv"
+                csv_utils.df_to_csv(func_df, func_path)
+                colored_print(f"  💾  Saved {func:<20} speed to {func_path}", color="CYAN")
