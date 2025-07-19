@@ -115,8 +115,8 @@ To add a new FFT implementation:
 1. Create a new file in `fft_core/`, e.g. `fft_myalgo.py`.
 2. Decorate your FFT function with `@register_fft` from `fft_core.selection`:
    ```python
-    from .selection import register_fft
     import numpy as np
+    from fft_core.selection import register_fft
 
     @register_fft
     # Or use a custom name: @register_fft(name="myalgo")
@@ -129,6 +129,9 @@ To add a new FFT implementation:
     - The function must accept a 1D np.ndarray of complex values and return a transformed np.ndarray of the same shape and type.
 
 3. The main script will automatically detect `fft_myalgo.fft` and include it in benchmarks.
+
+> [!NOTE]
+> To organize your implementations, you can use subfolders in fft_core/ (with `__init__.py`), e.g. `fft_core/mygroup/fft_cool.py`
 
 ### Listing Registered FFT Implementations
 
