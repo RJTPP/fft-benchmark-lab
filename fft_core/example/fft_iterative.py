@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from .selection import register_fft
+from fft_core.selection import register_fft
 
 
 # @register_fft(name="iterative")
