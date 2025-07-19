@@ -27,8 +27,8 @@ from utils.io_utils import colored_print, qprint
 RESULT_DIR = "results"
 
 fft_functions = {
-    "numpy": numpy_fft,
     "scipy": scipy_fft,
+    # "numpy": numpy_fft,
     **fft_functions
 }
 
