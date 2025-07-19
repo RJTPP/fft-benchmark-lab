@@ -161,6 +161,7 @@ uv run get_registered_fft.py [-l | --list] [-v | --verbose]
   💾  Saved speed   results to results/results_20250101_000000/speed.csv
 ```
 
+<!-- TODO: Update this section -->
 ### CSV Output Format
 
 **metrics.csv** (in `<out_dir>/metrics.csv`):
