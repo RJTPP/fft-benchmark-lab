@@ -1,8 +1,11 @@
 """Base FFT implementations."""
 
+import sys
+from pathlib import Path
+
 import numpy as np
 
-from .selection import register_fft
+from fft_core.selection import register_fft
 
 
 # @register_fft

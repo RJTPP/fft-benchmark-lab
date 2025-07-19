@@ -1,6 +1,9 @@
+"""Radix-4 Iterative FFT implementation."""
+
+
 import numpy as np
 
-from .selection import register_fft
+from fft_core.selection import register_fft
 
 
 def radix2_bit_reversal(x: np.ndarray) -> np.ndarray:

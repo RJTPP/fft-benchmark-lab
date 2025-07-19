@@ -1,7 +1,9 @@
-import numpy as np
-from numba import jit, njit
+"""Numba-optimized FFT implementations with in-place operations."""
 
-from .selection import register_fft
+import numpy as np
+from numba import njit
+
+from fft_core.selection import register_fft
 
 
 @njit(cache=True)

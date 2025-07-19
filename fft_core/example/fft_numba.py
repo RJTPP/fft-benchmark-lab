@@ -1,9 +1,10 @@
 """Numba-optimized FFT implementations."""
 
+
 import numpy as np
 from numba import njit
 
-from .selection import register_fft
+from fft_core.selection import register_fft
 
 
 @njit(cache=True)
