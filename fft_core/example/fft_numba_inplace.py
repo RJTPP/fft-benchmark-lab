@@ -29,8 +29,8 @@ def _fft_iterative_numba_inplace_helper(x: np.ndarray) -> np.ndarray:
     NOTE: This function modifies the input array 'x'.
     """
     N = x.shape[0]
-    # if N & (N - 1) != 0:
-    #     raise ValueError("Input size must be a power of 2")
+    if N & (N - 1) != 0:
+        raise ValueError("Input size must be a power of 2")
 
     # 1. Perform in-place bit-reversal permutation
     indices = bit_reverse_indices(N)

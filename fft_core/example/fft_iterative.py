@@ -12,8 +12,8 @@ def fft_iterative(x: np.ndarray) -> np.ndarray:
     The bit-reversed order mimics the order of the base-case subproblems in recursion.
     """
     N = x.shape[0]
-    # if N & (N - 1) != 0:
-    #     raise ValueError("Input size must be a power of 2")
+    if N & (N - 1) != 0:
+        raise ValueError("Input size must be a power of 2")
 
     # Bit-reversal permutation
     bits = int(np.log2(N))

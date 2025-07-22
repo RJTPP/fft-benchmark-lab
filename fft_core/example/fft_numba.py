@@ -48,9 +48,9 @@ def fft_iterative_numba(x: np.ndarray) -> np.ndarray:
     N = x.shape[0]
     
     # (commented out for speed)
-    # # Check if the input size is a power of 2
-    # if N & (N - 1) != 0:
-    #     raise ValueError("Input size must be a power of 2")
+    # Check if the input size is a power of 2
+    if N & (N - 1) != 0:
+        raise ValueError("Input size must be a power of 2")
 
     # Compute the bit-reversed indices
     indices = bit_reverse_indices(N)

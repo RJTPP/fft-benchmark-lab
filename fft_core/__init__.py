@@ -9,7 +9,6 @@ skip_files = ["__init__.py", "__pycache__", "selection.py"]
 
 def import_files(dir: Path, base_pkg: str):
     for path in dir.iterdir():
-        # print(path)
         if path.is_file() and path.suffix == ".py" and path.name not in skip_files:
             # module name: e.g. fft_core.fft_numba or fft_core.extra.fft_foo
             module_name = f"{base_pkg}.{path.stem}"

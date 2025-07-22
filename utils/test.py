@@ -133,22 +133,3 @@ if __name__ == "__main__":
     b = test_speed(np.fft.fft, test_case.get_large_test_cases(), verbose=True)
     c = test_speed(scipy_fft, test_case.get_large_test_cases(), verbose=True)
     
-    data = []
-    for x in [a, a]:
-        data.extend(x)
-    
-    columns = ["name", "test_no", "input_size", "mae", "mse", "is_pass", "is_error"]
-    data = [
-        [
-            x[y] for y in columns
-        ]
-        for x in sorted(data, key=lambda x: (x["name"], x["test_no"]))
-        ]
-    import polars as pl
-    print(pl.DataFrame(data, schema=columns))
-    
-    # for test in a:
-    #     print(test)
-        
-    # for test in b:
-    #     print(test)
