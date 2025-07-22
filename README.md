@@ -161,10 +161,24 @@ uv run get_registered_fft.py [-l | --list] [-v | --verbose]
   💾  Saved speed   results to results/results_20250101_000000/speed.csv
 ```
 
-<!-- TODO: Update this section -->
 ### CSV Output Format
 
-**metrics.csv** (in `<out_dir>/metrics.csv`):
+Benchmark results are saved under the `/results/` folder in a timestamped subdirectory, e.g., `results/results_20250101_000000/`, with the following structure:
+
+```
+results/
+ ┗ results_YYYYMMDD_HHMMSS/
+   ┣ metrics/
+   ┃ ┣ FUNC_NAME.csv         # Individual metric results per function
+   ┃ ┗ ...
+   ┣ speed/
+   ┃ ┣ FUNC_NAME.csv         # Individual speed results per function
+   ┃ ┗ ...
+   ┣ metrics.csv             # Combined metrics for all functions
+   ┗ speed.csv               # Combined speed for all functions
+```
+
+**metrics.csv** and metrics/FUNC_NAME.csv share the same format:
 
 ```csv
 func,test_no,input_size,mae,mse,is_pass,is_error
@@ -178,12 +192,15 @@ func,test_no,input_size,mae,mse,is_pass,is_error
 - **is_pass**: whether the result matched tolerance (`true`/`false`)  
 - **is_error**: whether an exception occurred (`true`/`false`)  
 
-**speed.csv** (in `<out_dir>/speed.csv`):
+**speed.csv** and speed/FUNC_NAME.csv share the same format:
 
 ```csv
-metric,func,test_no,input_size,time_used_us,time_per_bin_us,is_error
+func,test_no,input_size,time_used_us,time_per_bin_us,is_error
 ```
 
+- **func**: FFT function name  
+- **test_no**: index of the test case  
+- **input_size**: signal length  
 - **time_used_us**: total execution time in microseconds  
 - **time_per_bin_us**: average time per FFT bin  
 - **is_error**: whether an exception occurred during timing (`true`/`false`)  
