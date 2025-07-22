@@ -1,5 +1,5 @@
 [project]
-name = "custom-fft-lab"
+name = "fft-benchmark-lab"
 version = "0.3.1"
 description = "Hands-on exploration and benchmarking of custom FFT implementations"
 authors = [
