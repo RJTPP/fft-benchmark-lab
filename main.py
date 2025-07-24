@@ -120,8 +120,8 @@ if __name__ == "__main__":
         metrics_df = test_fft_metrics(test_case.get_combined_test_cases(), verbose=is_verbose)
         if args.table:
             with pl.Config(tbl_rows=-1):
-                qprint("Metrics", quiet=args.quiet)
-                qprint(metrics_df, quiet=args.quiet)
+                qprint("Metrics", quiet=args.minimal)
+                qprint(metrics_df, quiet=args.minimal)
     
     # Test Speed
     if args.mode in ["speed", "all"]:
@@ -131,8 +131,8 @@ if __name__ == "__main__":
         speed_df = test_fft_speed(test_case.get_massive_test_cases(), verbose=is_verbose)
         if args.table:
             with pl.Config(tbl_rows=-1):
-                qprint("Speed", quiet=args.quiet)
-                qprint(speed_df, quiet=args.quiet)
+                qprint("Speed", quiet=args.minimal)
+                qprint(speed_df, quiet=args.minimal)
                 
     # Save to CSV
     if args.save_csv:
