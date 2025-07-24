@@ -18,7 +18,7 @@ def get_real_test_cases():
     global _real_test_cases
     if _real_test_cases is None:
         _real_test_cases = [
-            np.random.rand(2**x) for x in range(0, 10)
+            np.random.rand(2**x) for x in range(0, 20)
         ]
     return _real_test_cases
 
@@ -28,7 +28,7 @@ def get_complex_test_cases():
     global _complex_test_cases
     if _complex_test_cases is None:
         _complex_test_cases = [
-            np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(0, 10)
+            np.random.rand(2**x) + 1j * np.random.rand(2**x) for x in range(0, 20)
         ]
     return _complex_test_cases
 
