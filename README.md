@@ -59,7 +59,7 @@ project/
 **Clone this repository:**
 
 ```bash
-git clone https://github.com/your-username/fft-benchmark-lab.git
+git clone https://github.com/RJTPP/fft-benchmark-lab.git
 cd fft-benchmark-lab
 ```
 
