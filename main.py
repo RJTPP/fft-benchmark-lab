@@ -39,10 +39,10 @@ def get_args():
     parser.add_argument("-t", "--table", help="output as table", action="store_true")
     parser.add_argument(
         "-s", "--save-csv",
-        metavar="FILENAME",
+        metavar="DIRNAME",
         nargs="?",
         const=True,  # Temporary placeholder to detect usage without value
-        help="Optionally save results to a CSV file. If no filename is provided, uses results_YYYYMMDD_HHMMSS.csv"
+        help="Optionally save results to CSV files. If no directory name is provided, uses /results_YYYYMMDD_HHMMSS"
     )
     parser.add_argument("--minimal", help="Reduce output verbosity during tests", action="store_true")
     return parser.parse_args()
