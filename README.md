@@ -151,15 +151,18 @@ uv run get_registered_fft.py [-l | --list] [-v | --verbose]
 🔍 Correctness Testing: simple_fft...
   ✅ Test case 1: PASS (MAE: 0, MSE: 0+0j)
   ✅ Test case 2: PASS (MAE: 0, MSE: 0+0j)
+  ...
 
 🕐 Speed Testing: simple_fft...
   ✅ Time (size: 1024): 17.92 µs (avg per bin: 0.018 µs)
   ✅ Time (size: 2048): 42.68 µs (avg per bin: 0.021 µs)
+  ...
 
 🗂️  Saving results...
-  💾  Saved metrics results to results/results_20250101_000000/metrics.csv
-  💾  Saved speed   results to results/results_20250101_000000/speed.csv
+  💾  Saved simple_fft metrics to ...
+  ...
 ```
+
 
 ### CSV Output Format
 
@@ -167,7 +170,7 @@ Benchmark results are saved under the `/results/` folder in a timestamped subdir
 
 ```
 results/
- ┗ results_YYYYMMDD_HHMMSS/
+ ┗ results_YYYYMMDD_HHMMSS/  # Or the provided directory name
    ┣ metrics/
    ┃ ┣ FUNC_NAME.csv         # Individual metric results per function
    ┃ ┗ ...
