@@ -112,7 +112,7 @@ if __name__ == "__main__":
     test_fft_metrics(test_case.get_simple_test_cases(), verbose=False)
     
     # Test metrics
-    if args.mode in ["check", "all"]:
+    if args.mode in ["metrics", "all"]:
         qprint(quiet=is_quiet)
         qprint("Testing metrics...", quiet=is_quiet)
         qprint(quiet=is_quiet)
