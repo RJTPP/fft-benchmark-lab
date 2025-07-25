@@ -130,7 +130,7 @@ To add a new FFT implementation:
 
 3. The main script will automatically detect `fft_myalgo.fft` and include it in benchmarks.
 
-> [!NOTE]
+> [!TIP]
 > To organize your implementations, you can use subfolders in fft_core/ (with `__init__.py`), e.g. `fft_core/mygroup/fft_cool.py`
 
 ### Listing Registered FFT Implementations
